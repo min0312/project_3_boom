@@ -26,10 +26,11 @@ const init = () => {
   for (let i=1; i<=9; i++) {
     document.getElementById(`box${i}`).innerHTML = '';
   }
-}
+
 
 // 선택했던 숫자 배열 초기화
 selNum = [];
+}
 
 // 숫자박스가 선택된 경우
 // function show(n) {
@@ -42,15 +43,20 @@ const show = (n) => {
       return
   }
 
+
+
  // 폭탄이 있는 배열을 참고하여 그림 변경
-  let imgSrc = "Null";
+  let imgSrc = null;
   if (num[n-1] == 1) imgSrc = "boom";
   else imgSrc = "hart";
 
+  // 현재 눌러진 숫자박스에 그림 표시
+  document.getElementById(`box${n}`).innerHTML = `<img src=./images/${imgSrc}.png>`;
+
+  
+
   //눌러진 번호판 번호를 배열에 추가
-  if (!selNum.includes(n)) {
-    selNum.push(n);
-  }
+  if (!selNum.includes(n)) selNum.push(n);
   // cnt++;
   console.log(selNum, cnt, selNum.length);
 
@@ -58,8 +64,9 @@ const show = (n) => {
   if (selNum.length == 8) {
     let fn = [1,2,3,4,5,6,7,8,9].filter((i) => !selNum.includes(i));
     console.log(fn[0]);
-    document.getElementById(`box${fn}`).innerHTML = `<img src=./images/hart.png>`
+    document.getElementById(`box${fn[0]}`).innerHTML = `<img src=./images/hart.png>`
     msgShow("성공")
+    shuffleFlag = false;
   }
 
   // 실패 체크
@@ -67,21 +74,19 @@ const show = (n) => {
     shuffleFlag = false;
     msgShow("실패");
   }
-
-  // 현재 눌러진 숫자박스에 그림 표시
-  document.getElementById(`box${n}`).innerHTML = `<img src=./images/${imgSrc}.png>`;
 }
 
 // 폭탄 섞기
 const boxShuffle = () => {
   num.sort(() => Math.random() - 0.5);
   shuffleFlag = true;
+
   init(); // 초기화 함수 호출
   console.log(num);
 }
 
 // /* DOM이 로드된 후에 클릭이벤트 연결*/
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < 8; i++) {
     num.push(0);
   }
