@@ -1,3 +1,11 @@
+폭탄게임💣
+https://min0312.github.io/project_3_boom/
+
+
+
+
+
+--------
 + 삼향연산자 => 조건식 ? 참 : 거짓
 + parseInt : 문자를 숫자로 변환
 + !isNaN : 문자열이 아닌 것
